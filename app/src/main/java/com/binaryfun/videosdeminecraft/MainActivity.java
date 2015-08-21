@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,7 +22,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
     private ListView videosFound;
     private Handler handler;
@@ -30,6 +31,12 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setTitle("   Vídeos de Minecraft");
         setContentView(R.layout.activity_main);
 
         // BANNER
@@ -119,6 +126,9 @@ public class MainActivity extends ActionBarActivity {
             case R.id.action_settings:
                 openSettings();
                 return true;
+            case R.id.aboutus:
+                openAboutUs();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -126,6 +136,10 @@ public class MainActivity extends ActionBarActivity {
     // abre a view de configuracoes
     private void openSettings(){
         Intent set = new Intent(getApplication(), SettingsActivity.class);
+        startActivity(set);
+    }
+    private void openAboutUs(){
+        Intent set = new Intent(getApplication(), AboutUs.class);
         startActivity(set);
     }
 }

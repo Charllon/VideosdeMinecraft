@@ -15,6 +15,5 @@ public class AboutUs  extends AppCompatActivity {
 
         email.setText("charllondeveloper@gmail.com");
 
-        //criar uma view comum
     }
 }
