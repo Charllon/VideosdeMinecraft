@@ -30,10 +30,6 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
-        getSupportActionBar().setTitle("   Vídeos de Minecraft");
         setContentView(R.layout.activity_main);
 
         // BANNER
@@ -123,9 +119,6 @@ public class MainActivity extends ActionBarActivity {
             case R.id.action_settings:
                 openSettings();
                 return true;
-            case R.id.aboutus:
-                openAboutUs();
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -133,11 +126,6 @@ public class MainActivity extends ActionBarActivity {
     // abre a view de configuracoes
     private void openSettings(){
         Intent set = new Intent(getApplication(), SettingsActivity.class);
-        startActivity(set);
-    }
-
-    private void openAboutUs(){
-        Intent set = new Intent(getApplication(), AboutUs.class);
         startActivity(set);
     }
 }
