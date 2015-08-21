@@ -1,9 +1,12 @@
 package com.binaryfun.videosdeminecraft;
 
+import android.app.AlarmManager;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -39,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("   Vídeos de Minecraft");
         setContentView(R.layout.activity_main);
 
+        cancelNotification(this, 1401);
+
         // BANNER
         AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()
@@ -51,7 +57,18 @@ public class MainActivity extends AppCompatActivity {
 
         searchOnYoutube();
         addClickListener();
+
+        // cria o alarme a cada dia pra exibir o alerta
+        Intent notificationIntent = new Intent(this, CheckUpdates.class);
+        PendingIntent contentIntent = PendingIntent.getService(this, 0, notificationIntent,
+                PendingIntent.FLAG_CANCEL_CURRENT);
+
+        AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        am.cancel(contentIntent);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()
+                + AlarmManager.INTERVAL_DAY, AlarmManager.INTERVAL_DAY, contentIntent);
     }
+
 
     private void searchOnYoutube() {
 
@@ -141,6 +158,13 @@ public class MainActivity extends AppCompatActivity {
     private void openAboutUs(){
         Intent set = new Intent(getApplication(), AboutUs.class);
         startActivity(set);
+    }
+
+    // fechar a notificacao quando abre a tela
+    public static void cancelNotification(Context ctx, int notifyId) {
+        String ns = Context.NOTIFICATION_SERVICE;
+        NotificationManager nMgr = (NotificationManager) ctx.getSystemService(ns);
+        nMgr.cancel(notifyId);
     }
 }
 
