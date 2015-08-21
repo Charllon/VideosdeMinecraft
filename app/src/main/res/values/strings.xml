@@ -1,6 +1,19 @@
 <resources>
     <string name="app_name">Vídeos de Minecraft</string>
     <string name="banner_ad_unit_id">ca-app-pub-6871836896677551/6682866621</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Configurações</string>
     <string name="title_activity_player">PlayerActivity</string>
+    <string name="buttontitle">MOSTRAR MAIS</string>
+
+    <!--Settings-->
+    <string name="title_activity_settings">Configurações</string>
+    <string name="pref_notif">Notificações de novos vídeos</string>
+    <string name="pref_notif_desc">No máximo 2 notificações por dia</string>
+
+
+    <!--About us-->
+    <string name="title_activity_aboutus">Sobre nós</string>
+    <string name="action_aboutus">Sobre nós</string>
+
+
 </resources>

@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -93,18 +96,49 @@ public class MainActivity extends ActionBarActivity {
 
     private void addClickListener() {
         videosFound.setOnItemClickListener(
-            new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent intent = new Intent(getApplication(), PlayerActivity.class);
-                    intent.putExtra("VIDEO_ID", searchResults.get(position).getId());
-                    intent.putExtra("VIDEO_TITLE", searchResults.get(position).getTitle());
-                    intent.putExtra("VIDEO_DESCRIPTION", searchResults.get(position).getDescription());
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent intent = new Intent(getApplication(), PlayerActivity.class);
+                        intent.putExtra("VIDEO_ID", searchResults.get(position).getId());
+                        intent.putExtra("VIDEO_TITLE", searchResults.get(position).getTitle());
+                        intent.putExtra("VIDEO_DESCRIPTION", searchResults.get(position).getDescription());
 
-                    startActivity(intent);
+                        startActivity(intent);
+                    }
                 }
-            }
         );
+    }
+
+    // cria o menu
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+    // pega o click do menu
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                openSettings();
+                return true;
+            case R.id.aboutus:
+                openAboutUs();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    // abre a view de configuracoes
+    private void openSettings(){
+        Intent set = new Intent(getApplication(), SettingsActivity.class);
+        startActivity(set);
+    }
+
+    private void openAboutUs(){
+        Intent set = new Intent(getApplication(), AboutUs.class);
+        startActivity(set);
     }
 }
 

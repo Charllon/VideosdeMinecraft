@@ -5,13 +5,15 @@
     >
 
     <item
-        android:title="@string/app_name"
-        android:id="@+id/icon"
-        android:icon="@mipmap/ic_launcher"
-        />
-
-    <item android:id="@+id/action_settings"
+        android:id="@+id/action_settings"
         android:title="@string/action_settings"
         android:orderInCategory="100"
-        app:showAsAction="never" />
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/aboutus"
+        android:title="@string/action_aboutus"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        />
 </menu>

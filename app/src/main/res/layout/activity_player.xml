@@ -24,11 +24,13 @@
         android:layout_margin="10dp"
         />
 
+
     <ScrollView
+        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/videoBig_title"
-        >
+        android:id="@+id/scrollView">
 
         <TextView
             android:id="@+id/videoBig_description"
@@ -38,4 +40,16 @@
             android:layout_margin="10dp"
             />
     </ScrollView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:background="#f1f1f1"
+        android:text="@string/buttontitle"
+        android:textColor="#545454"
+        android:textSize="14sp"
+        android:layout_below="@+id/videoBig_title"
+        android:id="@+id/button"
+        />
+
 </RelativeLayout>
