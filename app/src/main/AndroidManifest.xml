@@ -40,6 +40,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.binaryfun.videosdeminecraft.MainActivity" />
         </activity>
+
+        <service android:name=".CheckUpdates" />
     </application>
 
 </manifest>

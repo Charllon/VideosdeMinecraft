@@ -1,5 +1,7 @@
 package com.binaryfun.videosdeminecraft;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -31,6 +34,13 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        // iniciar service para verificar novos videos
+        Intent check = new Intent(this, CheckUpdates.class);
+        startService(check);
+
+        cancelNotification(this, 7015);
 
         // BANNER
         AdView mAdView = (AdView) findViewById(R.id.adView);
@@ -128,5 +138,13 @@ public class MainActivity extends ActionBarActivity {
         Intent set = new Intent(getApplication(), SettingsActivity.class);
         startActivity(set);
     }
+
+    // fechar a notificacao quando abre a tela
+    public static void cancelNotification(Context ctx, int notifyId) {
+        String ns = Context.NOTIFICATION_SERVICE;
+        NotificationManager nMgr = (NotificationManager) ctx.getSystemService(ns);
+        nMgr.cancel(notifyId);
+    }
+
 }
 
