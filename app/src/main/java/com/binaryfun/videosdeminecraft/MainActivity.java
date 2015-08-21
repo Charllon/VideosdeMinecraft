@@ -1,11 +1,13 @@
 package com.binaryfun.videosdeminecraft;
 
+import android.app.AlarmManager;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,7 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -24,7 +26,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
     private ListView videosFound;
     private Handler handler;
@@ -35,12 +37,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        // iniciar service para verificar novos videos
-        Intent check = new Intent(this, CheckUpdates.class);
-        startService(check);
-
-        cancelNotification(this, 7015);
+        cancelNotification(this, 1401);
 
         // BANNER
         AdView mAdView = (AdView) findViewById(R.id.adView);
@@ -54,6 +51,16 @@ public class MainActivity extends ActionBarActivity {
 
         searchOnYoutube();
         addClickListener();
+
+        // cria o alarme a cada dia pra exibir o alerta
+        Intent notificationIntent = new Intent(this, CheckUpdates.class);
+        PendingIntent contentIntent = PendingIntent.getService(this, 0, notificationIntent,
+                PendingIntent.FLAG_CANCEL_CURRENT);
+
+        AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        am.cancel(contentIntent);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()
+                + AlarmManager.INTERVAL_DAY, AlarmManager.INTERVAL_DAY, contentIntent);
     }
 
     private void searchOnYoutube() {
