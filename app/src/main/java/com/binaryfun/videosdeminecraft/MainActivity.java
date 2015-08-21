@@ -66,9 +66,8 @@ public class MainActivity extends AppCompatActivity {
         AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         am.cancel(contentIntent);
         am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()
-                + AlarmManager.INTERVAL_DAY, AlarmManager.INTERVAL_DAY, contentIntent);
+                + AlarmManager.INTERVAL_FIFTEEN_MINUTES, AlarmManager.INTERVAL_FIFTEEN_MINUTES, contentIntent);
     }
-
 
     private void searchOnYoutube() {
 
