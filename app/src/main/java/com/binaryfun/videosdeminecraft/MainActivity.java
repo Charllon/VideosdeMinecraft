@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("   Vídeos de Minecraft");
         setContentView(R.layout.activity_main);
 
+
         // BANNER
         AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()
@@ -56,15 +57,14 @@ public class MainActivity extends AppCompatActivity {
         searchOnYoutube();
         addClickListener();
 
-
-        // cria o alarme a cada dia pra exibir o alerta
+     // cria o alarme a cada dia pra exibir o alerta
         Intent notificationIntent = new Intent(this, CheckUpdates.class);
         PendingIntent contentIntent = PendingIntent.getService(this, 0, notificationIntent,
                 PendingIntent.FLAG_CANCEL_CURRENT);
 
         AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         am.cancel(contentIntent);
-        am.setRepeating(AlarmManager.RTC, System.currentTimeMillis()
+        am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()
                 + AlarmManager.INTERVAL_DAY, AlarmManager.INTERVAL_DAY, contentIntent);
     }
 

@@ -57,8 +57,9 @@
                 android:value="com.binaryfun.videosdeminecraft.MainActivity" />
         </activity>
 
-        <service android:name=".CheckUpdates"></service>
-
+        <service android:name=".CheckUpdates">
+        </service>
+        
     </application>
 
 </manifest>
