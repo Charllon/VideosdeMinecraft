@@ -54,9 +54,7 @@ public class PlayerActivity extends YouTubeBaseActivity implements YouTubePlayer
     }
 
     private void requestNewInterstitial() {
-        AdRequest adRequest1 = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)//apagar
-                .build();
+        AdRequest adRequest1 = new AdRequest.Builder().build();
 
         mInterstitialAd.loadAd(adRequest1);
     }
