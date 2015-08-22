@@ -19,8 +19,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView videosFound;
     private Handler handler;
     public List<VideoItem> searchResults;
+    InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +45,21 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("   Vídeos de Minecraft");
         setContentView(R.layout.activity_main);
 
-
         // BANNER
         AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-6871836896677551/5764536624");
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                requestNewInterstitial();
+            }
+        });
+        requestNewInterstitial();
 
         videosFound = (ListView) findViewById(R.id.videos_found);
         handler = new Handler();
@@ -105,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 views.setText(searchResult.getViews());
                 return convertView;
             }
+
         };
         videosFound.setAdapter(adapter);
     }
@@ -160,6 +174,24 @@ public class MainActivity extends AppCompatActivity {
         String ns = Context.NOTIFICATION_SERVICE;
         NotificationManager nMgr = (NotificationManager) ctx.getSystemService(ns);
         nMgr.cancel(notifyId);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        displayInterstitial();
+    }
+
+    private void requestNewInterstitial() {
+        AdRequest adRequest1 = new AdRequest.Builder().build();
+
+        mInterstitialAd.loadAd(adRequest1);
+    }
+
+    public void displayInterstitial() {
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        }
     }
 }
 

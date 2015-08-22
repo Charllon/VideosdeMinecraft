@@ -1,5 +1,7 @@
 package com.binaryfun.videosdeminecraft;
 
+import android.app.Activity;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,24 +19,12 @@ import com.google.android.youtube.player.YouTubePlayerView;
 
 public class PlayerActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
-    InterstitialAd mInterstitialAd;
     private boolean descriptionOn = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
-
-        mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-6871836896677551/5764536624");
-
-        mInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdClosed() {
-                requestNewInterstitial();
-            }
-        });
-        requestNewInterstitial();
 
         YouTubePlayerView playerView;
         playerView = (YouTubePlayerView) findViewById(R.id.player_view);
@@ -43,34 +33,17 @@ public class PlayerActivity extends YouTubeBaseActivity implements YouTubePlayer
         TextView title = (TextView) findViewById(R.id.videoBig_title);
         title.setText(getIntent().getStringExtra("VIDEO_TITLE"));
 
+
         showDescription();
-
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        displayInterstitial();
-    }
-
-    private void requestNewInterstitial() {
-        AdRequest adRequest1 = new AdRequest.Builder().build();
-
-        mInterstitialAd.loadAd(adRequest1);
-    }
-
-    public void displayInterstitial() {
-        if (mInterstitialAd.isLoaded()) {
-            mInterstitialAd.show();
-        }else {
-            Toast.makeText(this, "Falha ao carregar Ad", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-        if(!b) {
-            youTubePlayer.cueVideo(getIntent().getStringExtra("VIDEO_ID"));
+        if (!b) {
+            youTubePlayer.loadVideo(getIntent().getStringExtra("VIDEO_ID"));
+            youTubePlayer.setShowFullscreenButton(false);
+
         }
     }
 
