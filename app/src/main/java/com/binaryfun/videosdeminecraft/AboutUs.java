@@ -15,7 +15,7 @@ public class AboutUs  extends AppCompatActivity {
         TextView about = (TextView) findViewById(R.id.about);
 
         about.setText("O Vídeos de Minecraft é um aplicativo que reúne em um só lugar os melhores vídeos de minecraft do youtube. " +
-                "Não somos responsáveis pelos conteúdos dos vídeos, apenas os indexamos.\n" +
+                "\nNão somos responsáveis pelos conteúdos dos vídeos, apenas os indexamos.\n" +
                 "\n" +
                 "Sugestões, reclamações, elogios ou contato comercial:");
         email.setText("binaryfunmobile@gmail.com");
