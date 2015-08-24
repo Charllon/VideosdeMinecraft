@@ -1,8 +1,12 @@
 package com.binaryfun.videosdeminecraft;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -26,24 +30,24 @@ public class PlayerActivity extends YouTubeBaseActivity implements YouTubePlayer
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
 
+
         YouTubePlayerView playerView;
         playerView = (YouTubePlayerView) findViewById(R.id.player_view);
         playerView.initialize(YoutubeConnector.KEY, this);
 
+
+
         TextView title = (TextView) findViewById(R.id.videoBig_title);
         title.setText(getIntent().getStringExtra("VIDEO_TITLE"));
 
-
         showDescription();
     }
-
 
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
         if (!b) {
             youTubePlayer.loadVideo(getIntent().getStringExtra("VIDEO_ID"));
-            youTubePlayer.setShowFullscreenButton(false);
-
+            //youTubePlayer.setShowFullscreenButton(false);
         }
     }
 
